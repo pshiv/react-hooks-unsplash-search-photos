@@ -2,6 +2,8 @@ import React, { useEffect, useReducer, useState } from 'react'
 import axios from 'axios';
 import HomeReducer from '../../reducers/HomeReducer'
 import search_icons from '../../search_icons.png';
+import ViewImage from '../viewImage/ViewImage'
+import AjaxLoader from '../ajaxLoader/AjaxLoader'
 
 function Home() {
 
@@ -17,7 +19,7 @@ function Home() {
 
     const [state, dispatch] = useReducer(HomeReducer, initialState);
 
-    const [photo, setPhoto] = useState('');    
+    const [photo, setPhoto] = useState('');
     const [isFechDetail, setisFechDetail] = useState(false);
     const [detail, setDetail] = useState({});
     const [pageNo, setPageNo] = useState(1);
@@ -41,12 +43,12 @@ function Home() {
 
     const callAPI = (event) => {
         const { keyCode } = event;
-        if (keyCode === 13 && event.target.value !== '') {            
-            setphotoList([])           
+        if (keyCode === 13 && event.target.value !== '') {
+            setphotoList([])
             setIsSearch(true);
             setPhoto(event.target.value);
 
-        } else if(keyCode === 13 && event.target.value === ''){
+        } else if (keyCode === 13 && event.target.value === '') {
             setPageNo(1)
             setIsSearch(false)
         }
@@ -120,44 +122,15 @@ function Home() {
     }
 
 
-    const ClickedImageView = () => {
-        return (<div className="modal">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <span className="close" onClick={closeModal}>&times;</span>
-                    <div><img src={detail.user.profile_image.small} alt={detail.user.name} />
-                        <span>{detail.user.name}
-                            <div><small>@{detail.user.username}</small></div>
-                        </span>
-                    </div>
-                </div>
-                <div className="modal-body">
-
-                    <img src={detail.urls.regular} className="detail-img" alt={detail.alt_description} />
-                </div>
-                <div className="modal-footer">
-                    <h3 className="text-center"><a className="download" href={`${detail.links.download}?force=true`} download={detail.alt_description}>Download</a>
-                    </h3>
-                </div>
-            </div>
-
-        </div>)
-    }
-
-    const ajaxLoader = () => {
-        return (<div className="overlay"><span className="text">Fetching...</span></div>)
-    }
-
-
     return (
         <React.Fragment>
-            {state.loading ? ajaxLoader() : <div className='bg-img' style={{ backgroundImage: `url(${state.randomPhoto})` }}>
+            {state.loading ? <AjaxLoader /> : <div className='bg-img' style={{ backgroundImage: `url(${state.randomPhoto})` }}>
                 <div className="photo-wrapper">
                     <div className="searchBox">
 
                         <input className="searchInput" type="text" name="" placeholder="Search for images here..." onChange={handleChange} />
                         <button className="searchButton" id="searchImg">
-                            <img src={search_icons} alt="Search"/>
+                            <img src={search_icons} alt="Search" />
                         </button>
                     </div>
                     <div className="img-wrapper">
@@ -174,13 +147,13 @@ function Home() {
                     {state.searched_photos.legth >= 1 ? '' : <p className="text-center"><span className="btn" onClick={loadPhotos}>Load More</span></p>}
                 </div>
 
-                {isFechDetail ? ClickedImageView() : ''}
+                {isFechDetail ? <ViewImage detail={detail} closeModal={closeModal} /> : ''}
 
             </div>}
 
             {state.error ? state.error : null}
 
-            {state.fetching ?  ajaxLoader(): null}
+            {state.fetching ? <AjaxLoader /> : null}
         </React.Fragment>
     )
 }
