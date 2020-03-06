@@ -5,6 +5,8 @@ import search_icons from '../../search_icons.png';
 import ViewImage from '../viewImage/ViewImage'
 import AjaxLoader from '../ajaxLoader/AjaxLoader'
 
+import Footer from '../footer/footer'
+
 function Home() {
 
     const initialState = {
@@ -16,6 +18,10 @@ function Home() {
 
     };
 
+    const tangsState = ['Dog', 'Cat', 'Space', 'Nature', 'Business', 'Office', 'Coffee', 'World']
+
+
+    const [tags, setTags] = useState(tangsState);
 
     const [state, dispatch] = useReducer(HomeReducer, initialState);
 
@@ -121,11 +127,30 @@ function Home() {
         setPageNo(prevPageNo => prevPageNo + 1)
     }
 
+    const TagsLists = () => {
+        const listItems = tags.map((t, i) =>
+            <li key={i}>{t}</li>
+        );
+        return (
+            <ul className="tag-list">
+                <li><b>Search by tags:</b></li>
+                {listItems}
+            </ul>
+        );
+    }
+
 
     return (
         <React.Fragment>
             {state.loading ? <AjaxLoader /> : <div className='bg-img' style={{ backgroundImage: `url(${state.randomPhoto})` }}>
+            <div className="bg-div"></div>
                 <div className="photo-wrapper">
+                    <header><h2 className="logo-text">Search<span>it</span></h2></header>
+                    <h2 className="heading-text">Free stock photos for everybody</h2>
+                    <p className="sub-heading-text"><small>We offer the best free stock photo's all in one place</small></p>
+
+                    <TagsLists />
+
                     <div className="searchBox">
 
                         <input className="searchInput" type="text" name="" placeholder="Search for images here..." onChange={handleChange} />
@@ -148,12 +173,14 @@ function Home() {
                 </div>
 
                 {isFechDetail ? <ViewImage detail={detail} closeModal={closeModal} /> : ''}
-
+               
             </div>}
+            
 
             {state.error ? state.error : null}
 
             {state.fetching ? <AjaxLoader /> : null}
+            {state.loading ? '' : <Footer />}
         </React.Fragment>
     )
 }

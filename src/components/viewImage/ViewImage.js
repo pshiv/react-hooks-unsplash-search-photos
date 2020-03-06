@@ -7,8 +7,8 @@ export default function ViewImage(props) {
             <div className="modal-header">
                 <span className="close" onClick={props.closeModal}>&times;</span>
                 <div><img src={props.detail.user.profile_image.small} alt={props.detail.user.name} />
-                    <span>{props.detail.user.name}
-                        <div><small>@{props.detail.user.username}</small></div>
+                    <span className="user-name">{props.detail.user.name}
+                        <div className="name-caption"><small>@{props.detail.user.username}</small></div>
                     </span>
                 </div>
             </div>

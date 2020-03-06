@@ -10,6 +10,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
  
 }
 
@@ -19,15 +20,52 @@ code {
 }
 
 .photo-wrapper{
-  max-width: 1150px;
-  margin: 0px auto 6rem auto;
+  max-width: 1060px;
+  margin: 0 auto;
+  /* z-index: 10; */
+  /* position: relative; */
+  padding-bottom: 6rem;
    
 }
 
-.bg-img{
+
+.bg-div::before{
+  content: '';
+    width: 106%;
+    height: 76vh;
+    position: absolute;
+    top: 34rem;
+    left: -4%;
+    transform-origin: top left;
+    transform: rotate(-4deg);
+    z-index: 0;
+    background: rgb(255, 255, 255);
+}
+
+.bg-div{
+  width: 100%;
+    /* height: 12vh; */
+    position: relative;
+}
+
+/* .bg-div::after {
+  content: '';
+  width: 95%;
   height: 100vh;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  -webkit-transform-origin: bottom left;
+  transform-origin: bottom left;
+  -webkit-transform: rotate(5deg);
+  transform: rotate(5deg);
+  z-index: 10;
+} */
+
+.bg-img{
+  /* height: 100vh; */
   background-repeat:no-repeat;
-  background-size: 100% 100%;
+  background-size: 100%;
 }
 
 .btn{
@@ -45,21 +83,26 @@ code {
 
 .searchBox {
   position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%,50%);
-    background: #ffffff;
-    height: 57px;
-    border-radius: 40px;
-    padding: 9px;
-    border: 1px solid gray;
-
+    /* top: 14%; */
+    /* left: 50%; */
+    /* transform: translate(-50%,50%); */
+    /* background: #ffffff; */
+    /* height: 57px; */
+    /* border-radius: 40px; */
+    /* padding: 5px; */
+    border: 1px solid #efefef;
+    border-radius: 13px;
+    background-color: #fff;
+    width: 450px;
 }
 
 .img-wrapper{
-  float: left;
-    margin-top: 24%;
-    width: 100%;
+  margin-top: 12%;
+  width: 100%;
+  height: 815px;
+  overflow-y: auto;
+  z-index: 99;
+  position: relative;
 
 }
 
@@ -67,7 +110,6 @@ code {
   position: relative;
   float: left;
   width: 31.5%;
-  height: 250px;
   margin: 8px;
   cursor: pointer;
 }
@@ -112,42 +154,53 @@ code {
 .searchButton {
   color: white;
     float: right;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     /* border-radius: 50%; */
     background: #2f3640;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.4s;
-    background: white;
+    background-color: rgb(14, 177, 177);
+    border-radius: 50%;
     /* color: #2f3640; */
     border: none;
     cursor: pointer;
+    position: absolute;
+    right: -14px;
+    top: 3px
 }
 
 .searchInput {
-  border:none;
-  background: none;
-  outline:none;
-  float:left;
-  padding: 0;
-  /* color: white; */
-  font-size: 16px;
-  transition: 0.4s;
-  line-height: 40px;
-  width: 0px;
-width: 340px;
-  padding: 0 6px;
-  cursor: text;
+  border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    /* color: white; */
+    font-size: 16px;
+    transition: 0.4s;
+    line-height: 40px;
+    width: 0px;
+    width: 79%;
+    padding: 0 6px;
+    cursor: text;
 
+}
+
+.user-name{
+  font-weight: 600;
+}
+.name-caption{
+  font-weight: normal;
 }
 
 
 .modal {
   /* display: none; Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 100; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
@@ -187,21 +240,31 @@ width: 340px;
 
 /* The Close Button */
 .close {
- 
-  float: right;
   font-size: 28px;
   font-weight: bold;
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  background-color: #000;
+  color: #fff;
+  /* justify-content: center; */
+  text-align: center;
+  line-height: 29px;
+  border-radius: 50%;
 }
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: rgb(197, 37, 37);
   text-decoration: none;
   cursor: pointer;
 }
 
 .modal-header {
-  padding: 12px 16px;
+  padding: 12px 29px;
   
 }
 .modal-header div img{
@@ -212,7 +275,7 @@ width: 340px;
     margin-right: 22px;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {padding: 2px 29px;}
 
 .modal-footer {
   padding: 16px 16px;
@@ -264,4 +327,86 @@ width: 340px;
   width: 120px;
   background-color: #ffff;
   padding: 5px;
+}
+
+.tag-list{
+  padding: 10px 0;
+    margin: 10px 0;
+}
+
+.tag-list li{
+  list-style-type: none;
+  color: yellow;
+  display: inline-block;
+  width: 70px;
+  padding: 2px 5px 10px 0px;
+}
+.tag-list li:first-child{
+  color: #fff;
+  width: 140px;
+}
+
+.sub-heading-text{
+  color: #fff;
+}
+
+.heading-text{
+  color: #fff;
+   
+    padding: 8px 0;
+    font-size: 2rem;
+}
+
+header{
+ max-width: 1060px;
+ margin: 0 auto;
+ margin-bottom: 5rem;
+}
+
+.logo-text{
+  color: #fff;   
+  
+    padding: 7px 0;
+}
+.logo-text span{
+  color: rgb(14, 177, 177);
+}
+
+footer{ 
+    margin: 0 auto;
+    /* padding: 7px 0; */
+    background-color: #252222;
+}
+footer div{
+  max-width: 1060px;
+    margin: 0 auto;
+    height: 15rem;
+    padding: 3rem 0;
+}
+
+footer section:first-child{
+  width: 25%;
+  float: left;
+  margin-top: 5%;
+}
+
+footer section:last-child{
+  width: 75%;
+  float: left;
+}
+
+footer section ul{
+  padding: 10px 0px;
+    float: left;
+    width: 31%;
+}
+
+.white-text{
+  color: #ffffff;
+}
+
+footer section ul li{
+  list-style-type: none;
+  color: rgb(184, 128, 8);
+  padding: 3px 0;
 }
