@@ -104,6 +104,7 @@ function Home() {
         axios.get(URL)
             .then(function (res) {
                 var resType = isSearch ? res.data.results : res.data
+                console.log(resType)
                 var arr = photoList.concat(resType)
                 setphotoList(arr)
                 dispatch({
@@ -166,10 +167,8 @@ function Home() {
                                 </div>
                             })
                         }
-
-
                     </div>
-                    {state.searched_photos.legth >= 1 ? '' : <p className="text-center"><span className="btn" onClick={loadPhotos}>Load More</span></p>}
+                    {state.searched_photos.legth >= 1 ? '' : <p className="load-data text-center"><span className="btn" onClick={loadPhotos}>Load More</span></p>}
                 </div>
 
                 {isFechDetail ? <ViewImage detail={detail} closeModal={closeModal} /> : ''}

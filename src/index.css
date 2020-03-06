@@ -171,6 +171,10 @@ code {
     right: -14px;
     top: 3px
 }
+.searchButton img{
+  width: 18px;
+  height: 18px;
+}
 
 .searchInput {
   border: none;
@@ -275,7 +279,12 @@ code {
     margin-right: 22px;
 }
 
-.modal-body {padding: 2px 29px;}
+.modal-body {
+  padding: 2px 29px;
+  padding: 2px 29px;
+    max-height: 400px;
+    overflow: auto;
+}
 
 .modal-footer {
   padding: 16px 16px;
@@ -409,4 +418,9 @@ footer section ul li{
   list-style-type: none;
   color: rgb(184, 128, 8);
   padding: 3px 0;
+}
+
+.load-data{
+  position: relative;
+    margin-top: 55px;
 }
