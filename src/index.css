@@ -62,7 +62,7 @@ code {
 .searchBox {
   position: absolute;
   border: 1px solid #efefef;
-  border-radius: 13px;
+  border-radius: 10px;
   background-color: #fff;
   width: 450px;
 }
